@@ -38,20 +38,4 @@ public class UserTests
         Assert.True(res.IsFailure); // Ожидаем, что вернет ошибку
         Assert.Equal("Пользователь не найден", res.Error); // убеждаемся, что ошибка именно та
     }
-    
-    [Fact]
-    public void LoginCorrect_ShouldFindUser()
-    {
-        var login = "qwerty";
-        _userRepositoryMock.Setup(repository => repository.GetByLogin(login))
-            .Returns(() => new User
-            {
-                Login = login
-            }); 
-        
-        var res = _userService.GetUserByLogin(login);
-        
-        Assert.True(res.Success); // Ожидаем, что вернет ошибки нет
-        Assert.Equal(login, res.Value.Login); // убеждаемся, что юзер тот что надо
-    }
 }
